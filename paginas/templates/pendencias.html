@@ -1,0 +1,93 @@
+{% extends 'modelo.html' %}
+{% load static %}
+
+
+
+{% block content %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Pendências ({{mes}})</h1>
+
+  <div>
+    {% for mes in meses %}
+      <a href="{% url 'pendencias' mes %}" class="btn btn-success" value="{{mes}} float-right">{{mes}}</a>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="row">
+  <div class="table-responsive col-lg-6">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th colspan="3" style="text-align: center; color: blue;">Receita</th>
+        </tr>
+        <tr>
+          <th>Descrição</th>
+          <th>Valor</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in receita %}
+        <tr>
+          <td>{{item.descricao}}</td>
+          <td>R$ {{item.valor}}</td>
+          <td>
+            <a href="{% url 'editar-receita' item.pk %}" class="btn btn-warning btn-sm" title="Editar">
+              <i class="fa fa-pencil" aria-hidden="true"></i>
+            <!-- <a class="btn btn-primary" href="{% url 'editar-receita' item.pk %}">Editar</a> -->
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="table-responsive  col-lg-6">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th colspan="4" style="text-align: center; color: red;">Despesa</th>
+        </tr>
+        <tr>
+          <th>Fornecedor</th>
+          <th>Descrição</th>
+          <th>Valor</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in despesa %}
+        <tr>
+          <td>{{item.fornecedor}}</td>
+          <td>{{item.descricao}}</td>
+          <td>R$ {{item.valor}}</td>
+          <td>
+            <a href="{% url 'editar-receita' item.pk %}" class="btn btn-warning btn-sm" title="Editar">
+              <i class="fa fa-pencil" aria-hidden="true"></i>
+            <!-- <a class="btn btn-primary" href="{% url 'editar-despesa' item.pk %}">Editar</a> -->
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+</main>
+
+{% endblock %}
+
+
+<!-- <div class="btn-toolbar mb-2 mb-md-0">
+  <div class="btn-group me-2">
+    <button type="button" class="btn btn-sm btn-outline-secondary">Compartilhar</button>
+    <button type="button" class="btn btn-sm btn-outline-secondary">Exportar</button>
+  </div>
+  <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+    <span data-feather="calendar" class="align-text-bottom"></span>
+    This week
+  </button>
+</div>
+</div> 
+<canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+-->

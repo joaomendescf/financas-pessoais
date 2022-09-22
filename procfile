@@ -1,0 +1,1 @@
+web: gunicorn financas_pessoais.wsgi

@@ -1,0 +1,108 @@
+{% extends 'modelo.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Cartão de Crédito</h1>
+    <a href="{% url 'cadastrar-cartao-de-credito' %}" class="btn btn-primary" style="margin-left: 100px"> Adicionar
+        Novo</a>
+</div>
+
+<!-- <div class="table-responsive"> -->
+
+<!-- <form action="#" method="GET" id="search-form">
+        <input class="form-control" type="text" name="nome" id="" autocomplete="off" placeholder="Nome ou parte dele">
+        <input type="text" name="nome" id="" class="p-1 border" autocomplete="off" placeholder="Nome ou parte dele">
+        <i class="fas fa-search" id="search-btn"></i>
+
+        <button type="submit" class="btn btn-success">Buscar</button>
+        <a href="{% url 'listar-cartao-de-credito' %}" class="btn btn-danger">Limpar</a>
+        <a href="{% url 'cadastrar-cartao-de-credito' %}" class="btn btn-primary" style="margin-left: 100px"> Adicionar Novo</a>
+    </form> -->
+
+<!-- <hr> -->
+<div class="table-responsive">
+    <table class="table table-striped" id="tabela-listar">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Bandeira</th>
+                <th>Número</th>
+                <th>Nome Titular</th>
+                <th>Vencimento Pgto</th>
+                <th>Código Seg</th>
+                <th>Data Val</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cartao in object_list %}
+            <tr>
+                <td>{{ cartao.nome }}</td>
+                <td>{{ cartao.bandeira }}</td>
+                <td>{{ cartao.numero }}</td>
+                <td>{{ cartao.nome_titular }}</td>
+                <td>{{ cartao.vencimento_pagamento }}</td>
+                <td>{{ cartao.codigo_seguranca }}</td>
+                <td>{{ cartao.data_validade }}</td>
+                <td>
+                    <a href="{% url 'editar-cartao-de-credito' cartao.pk %}" class="btn btn-warning btn-sm"
+                        title="Editar">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </a>
+                    <a href="{% url 'excluir-cartao-de-credito' cartao.pk %}" class="btn btn-danger btn-sm"
+                        title="Excluir">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+
+                </td>
+            </tr>
+            {% empty %}
+
+            <tr>
+                <td colspan="7" style="color: red"><strong>Nenhum Cartão de Crédito registrado</strong></td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+    <!-- área de paginação -->
+
+    <div class="text-center">
+        {%if page_obj.has_previous%}
+
+        {% if request.GET.descricao%}
+        <a href="?page=1&descricao={{request.GET.descricao}}">Primeira</a>
+        <a href="?page={{page_obj.previous_page_number}}&descricao={{request.GET.descricao}}">Voltar</a>
+        {%else%}
+        <a href="?page=1">Primeira</a>
+        <a href="?page={{page_obj.previous_page_number}}">Voltar</a>
+        {%endif%}
+
+        {%endif%}
+
+
+        <span>página {{page_obj.number}} de {{page_obj.paginator.num_pages}}</span>
+
+        {%if page_obj.has_next%}
+
+        {% if reqeust.GET.get.descricao%}
+        <a href="?page={{page_obj.next_page_number}}&descricao={{request.GET.descricao}}">Próxima</a>
+        <a href="?page={{page_obj.paginator.num_pages}}&descricao={{request.GET.descricao}}">Última</a>
+        {%else%}
+
+        <a href="?page={{page_obj.next_page_number}}">Próxima</a>
+        <a href="?page={{page_obj.paginator.num_pages}}">Última</a>
+        {%endif%}
+
+        {%endif%}
+    </div>
+</div>
+
+</div>
+
+{% endblock %}

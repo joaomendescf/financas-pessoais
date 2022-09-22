@@ -1,0 +1,42 @@
+{% extends 'modelo.html' %}
+{% load static %}
+
+
+{% block login %}
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Autenticação</h1>
+
+    </div>
+
+    
+    <div class="row">
+        <!-- <div class="col-md-4 mx-auto"> -->
+        <div class="col-md-12 mx-auto text-center">
+
+            <form action="" method="POST" autocomplete="off">
+
+                {% csrf_token %}
+                <!-- {{form.as_p}} -->
+                {{form.as_p}}
+
+
+                <hr class="mt-4">
+
+                {% autoescape off %}
+                {{icone}}
+                {% endautoescape %}
+
+                <button id='botoes' type="submit" class="btn btn-primary mt-3">Entrar</button>
+                <a href="{% url 'login' %}" class="btn btn-success mt-3">Limpar</a>
+                <!-- <a onclick=history.go(-1) href="#" class="btn btn-success mt-3 float-right">Cancelar</a> -->
+
+            </form>
+
+        </div>
+
+    </div>
+
+    {%endblock%}

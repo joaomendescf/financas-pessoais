@@ -1,0 +1,104 @@
+{% extends 'modelo.html' %}
+
+{% block content %}
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-12 px-md-4">
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Finanças Pessoais - Resumo Mensal ({{ano}})</h1>
+        <div>
+            {% for ano in anos %}
+            <a href="{% url 'resumo-mensal' ano %}" class="btn btn-success" value="{{ano}} float-right">{{ano}}</a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <table class="table table-striped" style="margin-top: 40px">
+        <thead>
+            <tr>
+                <th>RECEITAS</th>
+                <th>Janeiro</th>
+                <th>Fevereiro</th>
+                <th>Março</th>
+                <th>Abril</th>
+                <th>Maio</th>
+                <th>Junho</th>
+                <th>Julho</th>
+                <th>Agosto</th>
+                <th>Setembo</th>
+                <th>Outubro</th>
+                <th>Novembro</th>
+                <th>Dezembro</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {%for val in valoresReceita%}
+            {% for key, values in val.items %}
+            <tr>
+                <th>{{ key }}</th>
+                {% for item in values %}
+                <td>R$ {{ item }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+            {% endfor %}
+
+            <tr>
+                <td colspan="13"></td>
+            </tr>
+
+            <tr style="color: blue;">
+                <th>TOTAL</th>
+                {% for mes in totaisReceita %}
+                <td>R$ {{mes}}</td>
+                {% endfor %}
+            </tr>
+    </table>
+    <table class="table table-striped" style="margin-top: 40px">
+        <thead>
+            <tr>
+                <th>DESPESAS</th>
+                <th>Janeiro</th>
+                <th>Fevereiro</th>
+                <th>Março</th>
+                <th>Abril</th>
+                <th>Maio</th>
+                <th>Junho</th>
+                <th>Julho</th>
+                <th>Agosto</th>
+                <th>Setembo</th>
+                <th>Outubro</th>
+                <th>Novembro</th>
+                <th>Dezembro</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- <tr>
+                <td colspan="13" style="background: darkgray;"></td>
+            </tr> -->
+            {%for val in valoresDespesa%}
+            {% for key, values in val.items %}
+            <tr>
+                <th>{{ key }}</th>
+                {% for item in values %}
+                <td>R$ {{ item }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+            {% endfor %}
+
+            <tr>
+                <td colspan="13"></td>
+            </tr>
+
+            <tr style="color: red;">
+                <th>TOTAL</th>
+                {% for mes in totaisDespesa %}
+                <td>R$ {{mes}}</td>
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+
+    {% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'modelo.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Excluir {{ titulo_excluir }}</h1>
+
+        <div class="btn-toolbar mb-2 mb-md-0">
+
+        </div>
+
+    </div>
+
+    <div class="table-responsive">
+        <h3>{{ titulo }}</h3>
+        <p class="lead">
+            Confirme para excluir o registro definitivamente.
+        </p>       
+
+        <form action="" method="POST">
+            <!-- <form action="" method="POST" class= 'col-md-10 mx-auto'> -->
+            
+                <p>
+                    Deseja excluir o registro: <strong>{{ object }}</strong> ?
+                    <!-- o object vem do str definido no model -->
+                </p>
+            
+                {% csrf_token %}
+            <!-- {{form.as_p}} -->
+            {{form.as_p}}
+
+
+            <hr class="mt-4">
+            </hr>
+            <!-- {% autoescape off %}
+            {{icone}}
+            {% endautoescape %} -->
+
+            <button id='botoes' type="submit" class="btn btn-danger mt-3 float-right">Excluir</button>           
+            <a onclick=history.go(-1) href="#" class="btn btn-success mt-3 float-right">Cancelar</a>
+
+        </form>
+
+        </h3>
+    </div>
+
+    {%endblock%}
+
+    <script>
+
+
+    </script>

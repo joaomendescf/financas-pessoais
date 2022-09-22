@@ -1,0 +1,96 @@
+{% extends 'modelo.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Categoria Despesa</h1>    
+</div>
+
+<div class="table-responsive">
+    <form action="#" method="GET"  class='float-right'>
+        <input type="text" name="nome" id="" value="{{request.GET.nome}}" class="p-1 border" autocomplete="off"
+            placeholder="Nome ou parte dele">
+        <button type="submit" class="btn btn-success">Buscar</button>
+        <a href="{% url 'listar-categoria-despesa' %}" class="btn btn-danger">Limpar</a>
+        <a href="{% url 'cadastrar-categoria-despesa' %}" class="btn btn-primary float-right" style="margin-left: 100px"> Adicionar Novo</a>
+    </form>
+
+    <hr> -->
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Categoria Despesa</h1>
+        <a href="{% url 'cadastrar-categoria-despesa' %}" class="btn btn-primary" style="margin-left: 100px"> Adicionar
+            Novo</a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped" id="tabela-listar">
+            <thead>
+                <tr>                   
+                    <th>Nome</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for despesa in object_list %}
+                <tr>                    
+                    <td>{{ despesa.nome }}</td>
+                    <td>
+                        <a href="{% url 'editar-categoria-despesa' despesa.pk %}" class="btn btn-warning btn-sm"
+                            title="Editar">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
+                        <a href="{% url 'excluir-categoria-despesa' despesa.pk %}" class="btn btn-danger btn-sm"
+                            title="Excluir">
+                            <i class="fa fa-trash fa-solid" aria-hidden="true"></i>                           
+                        </a>                      
+
+                    </td>
+                </tr>
+                {% empty %}
+
+                <tr>
+                    <td style="color:red" colspan="7">Nenhuma despesa registrada</td>
+                </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+        <!-- área de paginação -->
+
+        <div class="text-center">
+            {%if page_obj.has_previous%}
+
+            {% if request.GET.descricao%}
+            <a href="?page=1&descricao={{request.GET.descricao}}">Primeira</a>
+            <a href="?page={{page_obj.previous_page_number}}&descricao={{request.GET.descricao}}">Voltar</a>
+            {%else%}
+            <a href="?page=1">Primeira</a>
+            <a href="?page={{page_obj.previous_page_number}}">Voltar</a>
+            {%endif%}
+
+            {%endif%}
+
+
+            <span>página {{page_obj.number}} de {{page_obj.paginator.num_pages}}</span>
+
+            {%if page_obj.has_next%}
+
+            {% if reqeust.GET.get.descricao%}
+            <a href="?page={{page_obj.next_page_number}}&descricao={{request.GET.descricao}}">Próxima</a>
+            <a href="?page={{page_obj.paginator.num_pages}}&descricao={{request.GET.descricao}}">Última</a>
+            {%else%}
+
+            <a href="?page={{page_obj.next_page_number}}">Próxima</a>
+            <a href="?page={{page_obj.paginator.num_pages}}">Última</a>
+            {%endif%}
+
+            {%endif%}
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
